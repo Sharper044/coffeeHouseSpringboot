@@ -1,22 +1,17 @@
+import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
-import './App.css';
 
 class App extends React.Component {
   public render() {
     return (
       <div className="App">
         <header className="App-header">
-          <p>
+          <Typography variant='h2'>
             Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          </Typography>
+          <Typography variant='h3'>
             Learn React
-          </a>
+          </Typography>
         </header>
       </div>
     );
