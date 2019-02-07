@@ -1,5 +1,5 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -11,10 +11,10 @@ import { theme } from './styles/theme';
 
 ReactDOM.render(
   <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
-    </MuiThemeProvider>
+      <App/>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );

@@ -1,21 +1,23 @@
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/styles';
 import * as React from 'react';
 
-class App extends React.Component {
-  public render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <Typography variant='h2'>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </Typography>
-          <Typography variant='h3'>
-            Learn React
-          </Typography>
-        </header>
-      </div>
-    );
-  }
-}
+import Body from './components/Body';
+import Header from './components/Header';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    flexGrow: 1,
+  },
+}));
+
+const App = () => {
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
+      <Header loggedIn={true}/>
+      <Body/>
+    </div>
+  );
+};
 
 export default App;
