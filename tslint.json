@@ -36,6 +36,7 @@
     "use-named-parameter": true,
     "variable-name": false,
     "whitespace": false,
-    "no-submodule-imports": false
+    "no-submodule-imports": false,
+    "object-literal-sort-keys": false,
   }
 }

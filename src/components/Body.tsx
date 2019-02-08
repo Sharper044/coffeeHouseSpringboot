@@ -3,9 +3,9 @@ import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 
-import CreateQuestion from './CreateQuestion';
-import OpenQuestions from './OpenQuestions';
-import Responses from './Responses';
+import CreateQuestion from '../pages/CreateQuestion';
+import OpenQuestions from '../pages/OpenQuestions';
+import Responses from '../pages/Responses';
 import TabContainer from './TabContainer';
 
 const useStyles = makeStyles((theme: Theme) => ({
