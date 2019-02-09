@@ -17,18 +17,26 @@ const useStyles = makeStyles((_theme: Theme) => ({
   }
 }));
 
-const Rating = (props: {rating: number}) => {
+const Rating = (props: {rating: number, isClosed: boolean}) => {
   const classes = useStyles();
   const [hoverLevel, setHoverLevel] = React.useState(-1);
-  const { rating } = props;
+  const { isClosed, rating } = props;
 
   const filled = (rating: number, level: number) => {
-    if (rating >= level && (hoverLevel === -1 || hoverLevel >= level)) {
-      return <FilledStar fontSize='small' className={classes.gold} onClick={(e) => handleClick(e, level)}/>;
-    } else if (rating < level && (hoverLevel === -1 || hoverLevel < level)){
-      return <EmptyStar fontSize='small' className={classes.grey} onClick={(e) => handleClick(e, level)}/>;
+    if (!isClosed) {
+      if (rating >= level && (hoverLevel === -1 || hoverLevel >= level)) {
+        return <FilledStar fontSize='small' className={classes.gold} onClick={(e) => handleClick(e, level)}/>;
+      } else if (rating < level && (hoverLevel === -1 || hoverLevel < level)) {
+        return <EmptyStar fontSize='small' className={classes.grey} onClick={(e) => handleClick(e, level)}/>;
+      } else {
+        return <EmptyStar fontSize='small' className={classes.gold} onClick={(e) => handleClick(e, level)}/>;
+      }
     } else {
-      return <EmptyStar fontSize='small' className={classes.gold} onClick={(e) => handleClick(e, level)}/>;
+      if (rating >= level) {
+        return <FilledStar fontSize='small' className={classes.gold}/>;
+      } else {
+        return <EmptyStar fontSize='small' className={classes.grey}/>;
+      }
     }
   };
 

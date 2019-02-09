@@ -1,4 +1,4 @@
-interface IComment {
+export interface IComment {
   author: string;
   date: string;
   isAnswer: boolean;
@@ -9,10 +9,12 @@ export interface IQuestion {
   title: string;
   question: string;
   date: string;
-  answered: boolean;
+  isClosed: boolean;
+  isLocked: boolean;
   rating: number;
   numberOfVotes: number;
   comments: IComment[];
+  responders: string[];
 }
 
 export const questions: IQuestion[] = [
@@ -20,27 +22,33 @@ export const questions: IQuestion[] = [
     title: 'Medici Blockchain Summit summary?',
     question: 'Will there be some kind of a summary or rundown of the presentations at the Medici Summit for empoyees who were not able to attend? I think it would be interesting to hear about what is happening with the blockchain companies who presented at the conference.',
     date: 'January 29, 2019',
-    answered: false,
+    isClosed: false,
+    isLocked: false,
     rating: 4.6,
     numberOfVotes: 5,
+    responders: ['Patrick Byrne', 'Stuart Harper'],
     comments: []
   },
   {
     title: 'If you had a time machine',
     question: 'Hindsight is 20/20. I am (and I think others as well are) interested on how decisions you made regarding Overstock Retail would be different.',
     date: 'January 13, 2019',
-    answered: false,
+    isClosed: false,
+    isLocked: false,
     rating: 4.5,
     numberOfVotes: 8,
+    responders: ['Patrick Byrne', 'Stuart Harper', 'Jace Copier'],
     comments: []
   },
   {
     title: 'Communication and cross team collaboration goal 2019',
     question: 'Patrick, thanks for supporting this platform for feedback. I really appreciate that you find value in somehting like coffee house, as I think it\'s a fairly unique thing to find in a large corporation. \n\nOn to the question at hand. I am wondering if you would be supportive of creating a goal for 2019 that we as a company improve our communication and cross team collaboration skills? Also, do you see poor communication an collaboration as an issue in our company? \n\n The reason I ask is, because while Overstock is great at a wide variety of things and a place I enjoy working at, one area we tend to miss the mark is with cross team strategizing, and communication (IMHO). It seems to be somewhat accepted as if it is just who we are and probably can\'t change. What I have experienced is that this creates a lot of stress and frustration for people lower on the ladder (and probably up top too). At the worst of times, poor communication and collaboration can result in turnover. In best case scenarios, it results in unfinished projects, or duplicated efforts, which is also frustrating as it can feel as though time and energy have been wasted.  \n\nThank you for your time.',
     date: 'December 5, 2018',
-    answered: false,
+    isClosed: false,
+    isLocked: false,
     rating: 4.0,
     numberOfVotes: 7,
+    responders: ['Patrick Byrne'],
     comments: [
       {
         author: 'Anonymous',
@@ -60,9 +68,11 @@ export const questions: IQuestion[] = [
     title: 'No question. Just Thank You',
     question: 'No question. Just Thank YouEnd of added content \nI would like to say thank you Patrick for the great perks Overstock offers to it\'s employees:\n\n-Beautiful building. The building along with the greenhouse looks stunning at night. \n-Health center. By switching to a High deductible plan and using the onsite health center I have saved so much money using this particular perk alone\n-generous 401k match. 6% match is sweet!!\n-above market pay with great work/life balance\n-9*80 schedule. What a great perk this is. it was great while it lasted (hope it comes back again next year :) )\n-the coffee house initiative is amazing. Rarely have I seen a company where employees get to have a platform with such direct access to its CEO\n\nAlso, I wish you all the best with your blockchain initiatives like TZERO, MLG. I can tell that your heart is in the right place which is why i think you will be successful with initiatives like MLG that will eventually help so many poor/middle class people in developing countries in terms of unlocking massive capital and giving their lands the necessary legitimacy they need so desperately. I see the MLG initiative as no less important than what Bill Gates has been trying to do in third world countries with his toilet initiative to get basic sanitation to about 2.3 billion people around the world( https://www.cnn.com/2018/11/06/asia/bill-gates-revolutionizes-toilets-scli-intl/index.html ). We folks in developed countries like the US take these basic things like sanitation, land titling for granted but for people in developing countries, these things are like a privilege only available to the rich rather than a citizen right. I know this because I come from one such country.\n\nPlease also convey my special thanks to Saum/Jonathan who are leading these initiatives. I wish you and them all the success.',
     date: 'December 11, 2018',
-    answered: false,
+    isClosed: false,
+    isLocked: false,
     rating: 3.3,
     numberOfVotes: 7,
+    responders: ['Patrick Byrne'],
     comments: [
       {
         author: 'Anonymous',
@@ -76,9 +86,11 @@ export const questions: IQuestion[] = [
     title: '15 years with Overstock',
     question: 'Hello Patrick, myself and a few others I know are coming up on our 15 years with Overstock and I wanted to thank you for the opportunity to share this journey with you. I was wondering if we could have the option for the one month sabbatical or trade it in for a one time check like we do for the 10 yr., I\'m sure there are a few of us that could really use a little extra money for bills or whatever, especially for a few of us that have maxed out on our pay scale for a while, thank you for all you do for us. ',
     date: 'November 1, 2017',
-    answered: true,
+    isClosed: true,
+    isLocked: false,
     rating: 3.1,
     numberOfVotes: 23,
+    responders: ['Patrick Byrne'],
     comments: [
       {
         author: 'Anonymous',
@@ -164,9 +176,11 @@ export const questions: IQuestion[] = [
     title: 'Using Blockchain on our Retail Business',
     question: 'Thanks for taking time to read through this. Blockchain is such a fascinating technology and its sure is interrupting or going to interrupt many areas and I was wondering if you had thought about using the block chain technology on our retail business and providing a platform that will give power on the hands of our partners to advertise their products and there by they controlling the price and inventory  the way they want and we incorporate the technology required for them to perform these using blockchain technology and provide only the software, services & support. Also, this would be great for our Cars and Insurance allowing the car manufactures and Insurance providers to advertise their cars and insurance with our blockchain technology.',
     date: 'January 3, 2018',
-    answered: true,
+    isClosed: true,
+    isLocked: true,
     rating: 2.9,
     numberOfVotes: 10,
+    responders: ['Patrick Byrne'],
     comments: [
       {
         author: 'Patrick Byrne',
@@ -180,9 +194,11 @@ export const questions: IQuestion[] = [
     title: 'Prop 2',
     question: 'Hello Patrick,\n\nOnce prop 2 goes into effect, Would ever consider dedicating a portion of the greenhouse into a grow house; if laws and zoning permit? Being able to go to the greenhouse on break for that would be convenient.\n\nThanks in advance.',
     date: 'November 26, 2018',
-    answered: true,
+    isClosed: true,
+    isLocked: false,
     rating: 3.0,
     numberOfVotes: 2,
+    responders: ['Patrick Byrne'],
     comments: [
       {
         author: 'Patrick Byrne',

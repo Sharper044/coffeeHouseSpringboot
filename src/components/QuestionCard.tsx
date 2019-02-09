@@ -7,6 +7,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { IQuestion } from '../testData';
 import Rating from './Rating';
+import Discussion from './Discussion';
+import CommentAndRespond from './CommentAndRespond';
+import LockMessage from './LockMessage';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -26,35 +29,36 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between'
-  }
+  },
 }));
 
 const QuestionCard = (props: {question: IQuestion}) => {
   const classes = useStyles();
+  const { question } = props;
 
   return (
-    <div className={classes.root}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <div className={classes.summary}>
-            <div className={classes.subtitle}>
-              <Typography className={classes.heading}>{props.question.title}</Typography>
-              <Rating rating={props.question.rating}/>
-            </div>
-            <div className={classes.subtitle}>
-              <Typography variant='caption'>Asked {props.question.date}</Typography>
-              <Typography variant='caption'>Rating {props.question.rating} out of {props.question.numberOfVotes} votes</Typography>
-            </div>
+    <ExpansionPanel className={classes.root}>
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <div className={classes.summary}>
+          <div className={classes.subtitle}>
+            <Typography className={classes.heading}>{question.title}</Typography>
+            <Rating rating={question.rating} isClosed={question.isClosed}/>
           </div>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            {props.question.question}
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-    </div>
-
+          <div className={classes.subtitle}>
+            <Typography variant='caption'>Asked {question.date}</Typography>
+            <Typography variant='caption'>Rating {question.rating} out of {question.numberOfVotes} votes</Typography>
+          </div>
+        </div>
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails className={classes.summary}>
+        <Typography>
+          {question.question}
+        </Typography>
+        <CommentAndRespond question={question}/>
+        <Discussion comments={question.comments}/>
+        <LockMessage isLocked={question.isLocked}/>
+      </ExpansionPanelDetails>
+    </ExpansionPanel>
   );
 };
 
