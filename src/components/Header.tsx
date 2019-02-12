@@ -27,7 +27,7 @@ interface IHeaderProps {
 }
 
 const Header = (props: IHeaderProps) => {
-  const { avatar, grow, icon, root } = useStyles();
+  const { avatar, grow, root, icon } = useStyles();
   const { loggedIn } = props;
   return (
     <AppBar position="static" className={root}>

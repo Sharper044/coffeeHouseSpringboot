@@ -13,7 +13,7 @@ const useStyles = makeStyles((_theme: Theme) => ({
 
 const OpenQuestions = () => {
   const classes = useStyles();
-  const openQuestionArr = questions.filter(question => !question.isClosed)
+  const openQuestionArr = questions.filter(question => !question.isAnswered)
 
   return (
     <div className={classes.root}>

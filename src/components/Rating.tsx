@@ -17,13 +17,13 @@ const useStyles = makeStyles((_theme: Theme) => ({
   }
 }));
 
-const Rating = (props: {rating: number, isClosed: boolean}) => {
+const Rating = (props: {rating: number, isAnswered: boolean}) => {
   const classes = useStyles();
   const [hoverLevel, setHoverLevel] = React.useState(-1);
-  const { isClosed, rating } = props;
+  const { isAnswered, rating } = props;
 
   const filled = (rating: number, level: number) => {
-    if (!isClosed) {
+    if (!isAnswered) {
       if (rating >= level && (hoverLevel === -1 || hoverLevel >= level)) {
         return <FilledStar fontSize='small' className={classes.gold} onClick={(e) => handleClick(e, level)}/>;
       } else if (rating < level && (hoverLevel === -1 || hoverLevel < level)) {

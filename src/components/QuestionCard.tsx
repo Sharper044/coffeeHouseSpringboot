@@ -42,7 +42,7 @@ const QuestionCard = (props: {question: IQuestion}) => {
         <div className={classes.summary}>
           <div className={classes.subtitle}>
             <Typography className={classes.heading}>{question.title}</Typography>
-            <Rating rating={question.rating} isClosed={question.isClosed}/>
+            <Rating rating={question.rating} isAnswered={question.isAnswered}/>
           </div>
           <div className={classes.subtitle}>
             <Typography variant='caption'>Asked {question.date}</Typography>

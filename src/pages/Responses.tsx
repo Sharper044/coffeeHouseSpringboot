@@ -12,7 +12,7 @@ const useStyles = makeStyles((_theme: Theme) => ({
 
 const Responses = () => {
   const classes = useStyles();
-  const respondedQuestionArr = questions.filter(question => question.isClosed)
+  const respondedQuestionArr = questions.filter(question => question.isAnswered)
 
 
   return (

@@ -42,12 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const canAnswer = true;
-
-// TODO: figure out the interplay between locked and closed, because they seem very similar right now.
-// TODO: build out the new question form
-// TODO: Figure out what should render and when based on question status.
-// TODO: clean up code and create tests.
+const canAnswer = false;
 
 const CommentAndRespond = (props: {question: IQuestion}) => {
   const { question } = props;
@@ -69,7 +64,7 @@ const CommentAndRespond = (props: {question: IQuestion}) => {
           id="comment-box"
           label={canAnswer ? 'Your Answer' : 'Add A Comment'}
           margin="dense"
-          disabled={question.isClosed}
+          disabled={question.isAnswered}
           InputLabelProps={{
             shrink: true,
           }}
@@ -98,7 +93,7 @@ const CommentAndRespond = (props: {question: IQuestion}) => {
             </React.Fragment>:
   
             <Button variant="contained" size="small" className={classes.button}>
-              {question.isClosed ? 'Re-Open Question' : 'Add Comment'}
+              {question.isAnswered ? 'Add Follow-up Comment' : 'Add Comment'}
             </Button>
           }
         </div>
@@ -112,7 +107,7 @@ const CommentAndRespond = (props: {question: IQuestion}) => {
               id="comment-box"
               label="Add Additional Responders"
               margin="dense"
-              disabled={question.isClosed}
+              disabled={question.isAnswered}
               InputLabelProps={{
                 shrink: true,
               }}

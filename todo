@@ -1,0 +1,69 @@
+// TODO: As a user, I need the ability to generate a direct link to a response, so that I can easily share the outcome of a question to other users.
+// TODO: As a Service, I need to authenticate access, so that I can ensure only users who have permission to access the tool are allowed through.
+// TODO: As a service, I need to provision access for new users, so they can access Coffee House without requesting access.
+// TODO: As a Service, I need to remove/hide disabled accounts from AWS so that areas dependent on an up to date employee list are accurate.
+// TODO: As a user, I need the ability to generate a link to a specific question, so that I can provide a direct path for users I want to share the question with.
+// TODO: As a user, I need the ability to subscribe to questions, so that I can get notified when activity has occurred to my subscribed questions.
+// TODO: As a user, I need the ability to filter responses, so that I can limit the results and find content related to my keywords
+// TODO: As a user, I need the ability to filter questions, so that I can reduce the amount of results and discover content related to my keywords.
+// TODO: As I user, show me questions with keywords to the title I type, so that I can see if a similar/related question has been asked already. And Allow me to view/rate/participate in the existing questions directly from this page.
+// TODO: As a user, I need the ability to rate questions, so that I can help good questions rise, and poor questions lower in rank.
+// TODO: As a user, I need the ability to contribute to an existing question, so that leadership can have a broader range of talking points in their response.
+// TODO: added responses should appear on a new row as a an addition/extension of the original question.
+// TODO: As a user, I need the ability to ask a question, so that I can have the opportunity of leadership answering my question. (New Question should be ranked at the bottom of the list)
+// TODO: As a user, I need the ability to append a follow-up question, so that the question can behave like a discussion rather than a single question. The question rank will reset and will need to rise in rank again to make it to the top.
+// TODO: As a Coffee House Owner, I need the ability to delegate another person to respond, so that a person with more insight can provide a more detailed response.
+// TODO: As a Coffee House Owner/Delegated Responder, I need the ability to end a discussion, so that no further questions can be asked on the subject.
+// TODO: As a Coffee House Owner / Delegated Responder, I need the ability to respond to questions, so that the community can see our response to the question raised.
+
+NOT MVP!!!
+// TODO: As a Coffee House Administrator/Owner, I need the ability to define the Title for the new instance of Coffee House, so that I can help provide distinction between multiple instances of Coffee House in our environment.
+// TODO: As a Coffee House Admin/Owner, I need the ability to define the color scheme for the new instance, so that I can help distinguish the different instances of Coffee House in our environment.
+// TODO: As a Coffee House Administrator/Owner, I need the ability to create a new instance of Coffee House, so that I can utilize the tool for a different audience and owner(s).
+// TODO: Admin Section: Administrator area of Coffee House to define owners, create instances, alter title or color
+// TODO: As a Coffee House Administrator, I need the ability to define/modify the Coffee House owner, so that I can ensure questions are being reviewed/answered by specific people.
+// TODO: As an Administrator, I need the ability to alter the title of Coffee House, so that it can be relevant to the scope/needs of the community supporting the tool.
+// TODO: As an Administrator, I need the ability to adjust the color scheme of Coffee House, so that I can help the tool stand out from other instances of Coffee House.
+// TODO: As an administrator, I need the ability to define Owners for the new instance, so that the owners can answer questions for the new instance.
+// TODO: As a user, I need the ability to see all instances of Coffee House, so that I can participate in other instances relative to me.
+// TODO: As a user, I need the ability to subscribe to Coffee House instances, so that I can pin multiple instances that I want to keep up to date with.
+// TODO: As a user, I should be able to browse other instances of Coffee House
+
+// TODO: Add Refresh questions button
+// TODO: Add the ability to sort the questions
+// TODO: Move the Alert modal to being a static message in the create questions page.
+// TODO: build out the new question form
+// TODO: Figure out what should render and when based on question status.
+// TODO: clean up code and create tests.
+
+We need the questions to be restructured. When deligated, they are cagorized as unanswered and stay at the top. Once answered, they are closed/locked. A question can then be reopened by a user. This then puts a link to the old question and a 'RE: [old title]' in the new question. It acts then like a new question since it is. The  
+
+-- SYSTEM --
+  - ROUTING -
+    Ln1 & Ln5: We need urls for all responses/questions, which means the introduction of react-router.
+
+  - AUTHENTICATION -
+    Ln2: Hook up authentication through Okta, but try to keep it as modular as possible 
+    Ln3: We need an automated way for allowing access of new users. Based off of azure AD/Graph or perhaps workday?
+    Extra: Create a .env file which has all the info on who the Coffee House owner is, acceptable login info, database info, and data on delegating.
+
+  - AWS -
+    Ln4: I dont see why this would be an issue. Why would there be anything in AWS dependent on up-to-date employee lists? Authentication and azure AD should handle everything for us.
+    Ln15: Need to structure the question data to include an array of responders.
+
+-- FRONT-END --
+  Ln1 & Ln5: We need a share button added to each question. An ellipsis icon will be helpful as we can put the subscribe button from Ln6.
+  Ln2: Add in a login button along with the avatar pic.
+  Ln6: Add a subscribe button in the ellipses menu
+  Ln7 & Ln8: Add the ability to filter the questions/responses by title.
+  Ln10: The default sort needs to be on ranking. In open questions the highest ranked question goes on top. 
+  Ln14: change the buttons to be more of a reopen-question button or ask follow-up
+  Ln15 & Ln16: Change the owner text to be "Respond & Delegate" or "Respond"
+
+  - CREATE QUESTION PAGE -
+    Ln9: Use the filtering system to search all questions by title when typing in a new title. They should appear on the side as a list and when clicked on create a modal just like the expansion panel that they can directly interact with.
+    Get this built, Formik may be overkill but I will look into it.
+
+  Extra: Add all Tooltips, Add ids as the key in all mappings, add in real functionality on all buttons.
+
+
