@@ -1,8 +1,12 @@
-import { makeStyles } from '@material-ui/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles, ThemeProvider } from '@material-ui/styles';
 import * as React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import Body from './components/Body';
-import Header from './components/Header';
+import Content from './components/HeaderAndContent';
+import { store } from './redux/store';
+import { theme } from './styles/theme';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -13,10 +17,16 @@ const useStyles = makeStyles(() => ({
 const App = () => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <Header loggedIn={true}/>
-      <Body/>
-    </div>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <div className={classes.root}>
+            <Content loggedIn={true}/>
+          </div>
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>
   );
 };
 

@@ -35,6 +35,8 @@ NOT MVP!!!
 // TODO: build out the new question form
 // TODO: Figure out what should render and when based on question status.
 // TODO: clean up code and create tests.
+// TODO: Add error bouriies
+
 
 We need the questions to be restructured. When deligated, they are cagorized as unanswered and stay at the top. Once answered, they are closed/locked. A question can then be reopened by a user. This then puts a link to the old question and a 'RE: [old title]' in the new question. It acts then like a new question since it is. The  
 

@@ -38,6 +38,7 @@
     "whitespace": false,
     "no-submodule-imports": false,
     "object-literal-sort-keys": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false
   }
 }

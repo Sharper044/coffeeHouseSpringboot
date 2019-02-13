@@ -1,25 +1,13 @@
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/styles';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
-import { store } from './redux/store';
 import * as serviceWorker from './serviceWorker';
 import './styles/index.css';
-import { theme } from './styles/theme';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App/>
-      </ThemeProvider>
-    </BrowserRouter>
-  </Provider>,
+  <App/>,
   document.getElementById('root')
 );
 
