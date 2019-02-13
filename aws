@@ -1,0 +1,18 @@
+Backend ideas:
+needs to be in AWS beanstalk
+Learn how to make a REST API in Java
+
+Get all Open questions
+Get all Questions - paginated?
+update question - this will help with comments, responses, delegation, rating etc.
+subscribe/unsubscribe user from question
+
+create question
+
+Login/logout
+
+deligation - perhaps handled by front end? but notification should be sent by the backend.
+
+
+
+

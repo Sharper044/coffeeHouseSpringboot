@@ -2,7 +2,7 @@ import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 
-import { Avatar, Button, Chip, TextField, Typography, Tooltip } from '@material-ui/core';
+import { Avatar, Button, Chip, TextField, Tooltip, Typography } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
 import { IQuestion } from '../testData';
 
@@ -50,7 +50,7 @@ const CommentAndRespond = (props: {question: IQuestion}) => {
 
   const handleDelete = () => {
     console.log('delete');
-  }
+  };
 
   if (question.isLocked) {
     return <div/>;
@@ -114,18 +114,18 @@ const CommentAndRespond = (props: {question: IQuestion}) => {
             />
           </div>
           <div>
-            {question.responders.map((responder, index) => {
-              if (responder !== 'Patrick Byrne') {
+            {question.responders.map(responder => {
+              if (responder.name !== 'Patrick Byrne') {
                 return (
                   <Chip
-                    key={index} 
+                    key={responder.id} 
                     onDelete={handleDelete} 
-                    label={responder} 
+                    label={responder.name} 
                     avatar={<Avatar><FaceIcon /></Avatar>}
                     className={classes.chip}
                     variant="outlined"
                   />
-                )
+                );
               }
               return;
             })}
@@ -134,8 +134,8 @@ const CommentAndRespond = (props: {question: IQuestion}) => {
 
         <div className={classes.chipTray}>
           {
-            question.responders.map((responder, index) => (
-            <Tooltip title={responder} key={index}>
+            question.responders.map(responder => (
+            <Tooltip title={responder.name} key={responder.name}>
               <Avatar className={classes.smallAvatar}>
                 <FaceIcon />
               </Avatar>

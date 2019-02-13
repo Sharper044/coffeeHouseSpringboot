@@ -1,15 +1,17 @@
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
+import classNames from 'classnames';
 import React from 'react';
 
-import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Typography } from '@material-ui/core';
+import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { IQuestion } from '../testData';
-import Rating from './Rating';
-import Discussion from './Discussion';
 import CommentAndRespond from './CommentAndRespond';
+import Discussion from './Discussion';
 import LockMessage from './LockMessage';
+import Rating from './Rating';
+import SocialMenu from './SocialMenu';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -22,14 +24,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   summary: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'flex-start',
-  },
-  subtitle: {
-    width: '100%',
-    display: 'flex',
     justifyContent: 'space-between'
   },
+  subtitle: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  right: {
+    alignItems: 'flex-end'
+  },
+  flex: {
+    display: 'flex',
+  }
 }));
 
 const QuestionCard = (props: {question: IQuestion}) => {
@@ -42,15 +49,18 @@ const QuestionCard = (props: {question: IQuestion}) => {
         <div className={classes.summary}>
           <div className={classes.subtitle}>
             <Typography className={classes.heading}>{question.title}</Typography>
-            <Rating rating={question.rating} isAnswered={question.isAnswered}/>
-          </div>
-          <div className={classes.subtitle}>
             <Typography variant='caption'>Asked {question.date}</Typography>
-            <Typography variant='caption'>Rating {question.rating} out of {question.numberOfVotes} votes</Typography>
+          </div>
+          <div className={classes.flex}>
+            <div className={classNames(classes.subtitle, classes.right)}>
+              <Rating rating={question.rating} isAnswered={question.isAnswered}/>
+              <Typography variant='caption'>Rating {question.rating} out of {question.numberOfVotes} votes</Typography>
+            </div>
+            <SocialMenu/>
           </div>
         </div>
       </ExpansionPanelSummary>
-      <ExpansionPanelDetails className={classes.summary}>
+      <ExpansionPanelDetails className={classes.subtitle}>
         <Typography>
           {question.question}
         </Typography>

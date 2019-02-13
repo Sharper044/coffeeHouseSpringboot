@@ -24,8 +24,8 @@ const Discussion = (props: {comments: IComment[]}) => {
 
   return (
     <List className={classes.root}>
-      {comments.reverse().map((comment, i) => (
-        <ListItem key={i} className={comment.isAnswer ? classes.answer : ''}>
+      {comments.reverse().map(comment => (
+        <ListItem key={comment.id} className={comment.isAnswer ? classes.answer : ''}>
           <Avatar>
             <AvatarIcon />
           </Avatar>

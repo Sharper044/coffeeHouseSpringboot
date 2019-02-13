@@ -22,17 +22,17 @@ const Rating = (props: {rating: number, isAnswered: boolean}) => {
   const [hoverLevel, setHoverLevel] = React.useState(-1);
   const { isAnswered, rating } = props;
 
-  const filled = (rating: number, level: number) => {
+  const filled = (starRating: number, level: number) => {
     if (!isAnswered) {
-      if (rating >= level && (hoverLevel === -1 || hoverLevel >= level)) {
+      if (starRating >= level && (hoverLevel === -1 || hoverLevel >= level)) {
         return <FilledStar fontSize='small' className={classes.gold} onClick={(e) => handleClick(e, level)}/>;
-      } else if (rating < level && (hoverLevel === -1 || hoverLevel < level)) {
+      } else if (starRating < level && (hoverLevel === -1 || hoverLevel < level)) {
         return <EmptyStar fontSize='small' className={classes.grey} onClick={(e) => handleClick(e, level)}/>;
       } else {
         return <EmptyStar fontSize='small' className={classes.gold} onClick={(e) => handleClick(e, level)}/>;
       }
     } else {
-      if (rating >= level) {
+      if (starRating >= level) {
         return <FilledStar fontSize='small' className={classes.gold}/>;
       } else {
         return <EmptyStar fontSize='small' className={classes.grey}/>;
@@ -43,7 +43,7 @@ const Rating = (props: {rating: number, isAnswered: boolean}) => {
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>, value: number) => {
     event.stopPropagation();
     console.log(value);
-  }
+  };
 
   return (
     <div className={classes.root} onMouseLeave={() => setHoverLevel(-1)}>

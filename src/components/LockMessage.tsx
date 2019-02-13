@@ -1,6 +1,6 @@
-import React from 'react';
 import { Avatar, ListItem, ListItemText } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
+import React from 'react';
 
 const LockMessage = (props: {isLocked: boolean}) => {
 
@@ -17,7 +17,7 @@ const LockMessage = (props: {isLocked: boolean}) => {
       </ListItem>
     );
   } else {
-    return <div/>
+    return <div/>;
   }
 };
 

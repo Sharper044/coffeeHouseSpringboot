@@ -3,6 +3,8 @@ import { ThemeProvider } from '@material-ui/styles';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
 import App from './App';
 import { store } from './redux/store';
 import * as serviceWorker from './serviceWorker';
@@ -11,10 +13,12 @@ import { theme } from './styles/theme';
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App/>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App/>
+      </ThemeProvider>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

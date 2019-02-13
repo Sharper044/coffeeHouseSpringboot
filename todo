@@ -64,6 +64,6 @@ We need the questions to be restructured. When deligated, they are cagorized as 
     Ln9: Use the filtering system to search all questions by title when typing in a new title. They should appear on the side as a list and when clicked on create a modal just like the expansion panel that they can directly interact with.
     Get this built, Formik may be overkill but I will look into it.
 
-  Extra: Add all Tooltips, Add ids as the key in all mappings, add in real functionality on all buttons.
+  Extra: Add all Tooltips, add in real functionality on all buttons.
 
 
