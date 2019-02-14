@@ -2,7 +2,7 @@ import { Avatar, ListItem, ListItemText } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
 import React from 'react';
 
-const LockMessage = (props: {isLocked: boolean}) => {
+const LockMessage = React.memo((props: {isLocked: boolean}) => {
 
   if (props.isLocked) {
     return (
@@ -19,6 +19,6 @@ const LockMessage = (props: {isLocked: boolean}) => {
   } else {
     return <div/>;
   }
-};
+});
 
 export default LockMessage;

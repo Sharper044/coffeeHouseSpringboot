@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const Discussion = (props: {comments: IComment[]}) => {
+const Discussion = React.memo((props: {comments: IComment[]}) => {
   const { comments } = props; // TODO: get the comments to appear in reverse order. Newest on top.
   const classes = useStyles();
 
@@ -37,6 +37,6 @@ const Discussion = (props: {comments: IComment[]}) => {
       ))}
     </List>
   );
-};
+});
 
 export default Discussion;

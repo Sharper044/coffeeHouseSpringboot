@@ -39,12 +39,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const QuestionCard = (props: {question: IQuestion}) => {
+const QuestionCard = ({question, hash}:{question: IQuestion, hash: string}) => {
   const classes = useStyles();
-  const { question } = props;
+  const hashCompare = `#${question.id}`;
+  console.log(hash);
 
   return (
-    <ExpansionPanel className={classes.root}>
+    <ExpansionPanel className={classes.root} defaultExpanded={hash === hashCompare}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <div className={classes.summary}>
           <div className={classes.subtitle}>

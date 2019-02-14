@@ -6,6 +6,8 @@ import {
   Drawer, 
   List,
   ListItem,
+  Tab,
+  Tabs,
   Toolbar, 
   Typography, 
 } from '@material-ui/core';
@@ -17,6 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import Body from './Body';
 
@@ -82,6 +85,17 @@ const useStyles = makeStyles( (theme: Theme) => ({
   placeholder: {
     height: 64,
   },
+  tabs: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  link: {
+    textDecoration: 'none',
+    color: theme.palette.primary.contrastText,
+  },
+  selected: {
+    color: theme.palette.primary.dark,
+  },
 }));
 
 interface IContentProps {
@@ -92,6 +106,12 @@ const Content = (props: IContentProps) => {
   const classes = useStyles();
   const { loggedIn } = props;
   const open = false;
+
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (_: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
 
   return (
     <div className={classes.root}>
@@ -106,9 +126,25 @@ const Content = (props: IContentProps) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Coffee House
           </Typography>
+          <Tabs 
+            value={value} 
+            onChange={handleChange} 
+            className={classes.tabs}
+            indicatorColor="none"
+          >
+            <Link className={classNames(classes.link, {[classes.selected]:value === 0})} to="/open">
+              <Tab label="Open Questions" />
+            </Link>
+            <Link className={classNames(classes.link, {[classes.selected]:value === 1})} to="/responses">
+              <Tab label="Responses" />
+            </Link>
+            <Link className={classNames(classes.link, {[classes.selected]:value === 2})} to="/new">
+              <Tab label="Create Question" />
+            </Link>
+          </Tabs>
           {loggedIn ? 
             <Avatar className={classes.avatar}>
-              <AvatarIcon />
+              <AvatarIcon/>
             </Avatar> :
             <Button color="inherit">Login</Button>
           }
@@ -130,7 +166,7 @@ const Content = (props: IContentProps) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Body/>
+        <Body setValue={setValue}/>
       </main>
     </div>
   );

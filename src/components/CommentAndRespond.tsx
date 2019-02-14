@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const canAnswer = false;
 
-const CommentAndRespond = (props: {question: IQuestion}) => {
+const CommentAndRespond = React.memo((props: {question: IQuestion}) => {
   const { question } = props;
   const classes = useStyles();
 
@@ -150,6 +150,6 @@ const CommentAndRespond = (props: {question: IQuestion}) => {
     </React.Fragment>
     );
   }
-};
+});
 
 export default CommentAndRespond;

@@ -17,7 +17,7 @@ const useStyles = makeStyles((_theme: Theme) => ({
   }
 }));
 
-const Rating = (props: {rating: number, isAnswered: boolean}) => {
+const Rating = React.memo((props: {rating: number, isAnswered: boolean}) => {
   const classes = useStyles();
   const [hoverLevel, setHoverLevel] = React.useState(-1);
   const { isAnswered, rating } = props;
@@ -64,7 +64,7 @@ const Rating = (props: {rating: number, isAnswered: boolean}) => {
         </div>
     </div>
   );
-};
+});
 
 
 export default Rating;

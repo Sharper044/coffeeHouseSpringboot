@@ -1,10 +1,8 @@
-import { AppBar, Tab, Tabs } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import classNames from 'classnames';
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import { Link, Route, Switch } from 'react-router-dom';
 import CreateQuestion from '../pages/CreateQuestion';
 import OpenQuestions from '../pages/OpenQuestions';
 import Responses from '../pages/Responses';
@@ -25,57 +23,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   selected: {
     color: theme.palette.primary.dark,
-  }
+  },
 }));
 
-const Body = () => {
+const Body = ({setValue}: {setValue: React.Dispatch<React.SetStateAction<number>>}) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (_: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs 
-          value={value} 
-          onChange={handleChange} 
-          className={classes.tabs}
-          indicatorColor="none"
-        >
-          <Link className={classNames(classes.link, {[classes.selected]:value === 0})} to="/open">
-            <Tab label="Open Questions" />
-          </Link>
-          <Link className={classNames(classes.link, {[classes.selected]:value === 1})} to="/responses">
-            <Tab label="Responses" />
-          </Link>
-          <Link className={classNames(classes.link, {[classes.selected]:value === 2})} to="/new">
-            <Tab label="Create Question" />
-          </Link>
-        </Tabs>
-      </AppBar>
       <TabContainer>
         <Switch>
           <Route 
             exact path="/" 
-            render={() => {
+            render={({ location }) => {
               setValue(0);
-              return <OpenQuestions/>;
+              return <OpenQuestions location={location}/>;
             }}
           />
           <Route 
             path="/open" 
-            render={() => {
+            render={({ location }) => {
               setValue(0);
-              return <OpenQuestions/>;
+              return <OpenQuestions location={location}/>;
             }}/>
           <Route 
             path="/responses" 
-            render={() => {
+            render={({ location }) => {
               setValue(1);
-              return <Responses/>;
+              return <Responses location={location}/>;
             }}
           />
           <Route 
