@@ -24,9 +24,7 @@ const Responses = React.memo(({location}: IQuestionPageProps) => {
   return (
     <div className={classes.root}>
       {respondedQuestionArr.map(question => (
-        <div id={`${question.id}`}>
-          <QuestionCard question={question} key={question.id} hash={location.hash} />
-        </div>
+        <QuestionCard question={question} key={question.id} hash={location.hash} id={`${question.id}`}/>
       ))}
     </div>
   );

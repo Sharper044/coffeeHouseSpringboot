@@ -1,20 +1,23 @@
-import { Theme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/styles';
+import { Theme, withStyles } from '@material-ui/core/styles';
 import React from 'react';
 
 import { Avatar, Button, Chip, TextField, Tooltip, Typography } from '@material-ui/core';
 import FaceIcon from '@material-ui/icons/Face';
-import { IQuestion } from '../testData';
+import LockIcon from '@material-ui/icons/Lock';
+import DelegateIcon from '@material-ui/icons/PersonAdd';
+import SendIcon from '@material-ui/icons/Send';
+import { theme } from '../styles/theme';
+import { IQuestion, users } from '../testData';
 
 
-const useStyles = makeStyles((theme: Theme) => ({
+const styles = (th: Theme) => ({
   root: {
     width: '100%',
   },
   button: {
-    backgroundColor: theme.palette.primary.main,
+    // backgroundColor: th.palette.primary.main,
     marginLeft: '10px',
-    color: theme.palette.primary.contrastText,
+    color: th.palette.primary.main,
   },
   commentBar: {
     width: '100%',
@@ -35,18 +38,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: '10px',
   },
   smallAvatar: {
-    height: '20px',
-    width: '20px',
+    color: '#bdbdbd',
     marginRight: '5px',
     marginTop: '5px',
+  },
+  flex: {
+    display: 'flex',
+    alignItems: 'flex-end',
   }
-}));
+});
 
-const canAnswer = false;
-
-const CommentAndRespond = React.memo((props: {question: IQuestion}) => {
+const CommentAndRespond = React.memo((props: {question: IQuestion, classes: any}) => {
+  const {classes} = props;
   const { question } = props;
-  const classes = useStyles();
+  const userID = 1;
+  const canAnswer = users[userID].super || users[userID].delegatedQuestions.includes(question.id);
 
   const handleDelete = () => {
     console.log('delete');
@@ -69,87 +75,82 @@ const CommentAndRespond = React.memo((props: {question: IQuestion}) => {
             shrink: true,
           }}
         />
-        <div>
-          {
-            canAnswer ?
-  
-            <React.Fragment>
+        {
+          canAnswer ?
+            <div className={classes.flex}>
               <Tooltip 
-                enterDelay={500}
-                title="Respond to the question while leaving it open for discussion. (Select this if you also want to add more responders)"
+                title="Respond to the question and add another responder."
               >
-                <Button variant="contained" size="small" className={classes.button}>
-                  Respond
+                <Button variant="text" size="small" className={classes.button}>
+                  <DelegateIcon fontSize='small'/>
+                  <SendIcon fontSize='small'/>
                 </Button>
               </Tooltip>
               <Tooltip 
-                enterDelay={500}
-                title="Respond to the question and lock it out. (Select this if the conversation should be ended)"
+                title="Respond to the question and lock it. (Select this if the conversation should be ended)"
               >
-                <Button variant="contained" size="small" className={classes.button}>
-                  Respond and Lock
+                <Button variant="text" size="small" className={classes.button}>
+                  <LockIcon fontSize='small'/>
+                  <SendIcon fontSize='small'/>
                 </Button>
               </Tooltip>
-            </React.Fragment>:
-  
-            <Button variant="contained" size="small" className={classes.button}>
-              {question.isAnswered ? 'Add Follow-up Comment' : 'Add Comment'}
+            </div>
+          :
+            <Button variant="text" size="small" className={classes.button}>
+              Add Comment
             </Button>
-          }
-        </div>
+        }
       </div>
       {
         canAnswer ?
-        <React.Fragment>
-          <div className={classes.root}>
-            <TextField
-              className={classes.inputBar}
-              id="comment-box"
-              label="Add Additional Responders"
-              margin="dense"
-              disabled={question.isAnswered}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
+          <React.Fragment>
+            <div className={classes.root}>
+              <TextField
+                className={classes.inputBar}
+                id="comment-box"
+                label="Add Additional Responders"
+                margin="dense"
+                disabled={question.isAnswered}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </div>
+            <div>
+              {question.responders.map(responder => {
+                if (responder.name !== 'Patrick Byrne') {
+                  return (
+                    <Chip
+                      key={responder.id} 
+                      onDelete={handleDelete} 
+                      label={responder.name} 
+                      avatar={<Avatar><FaceIcon /></Avatar>}
+                      className={classes.chip}
+                      variant="outlined"
+                    />
+                  );
+                }
+                return;
+              })}
+            </div>
+          </React.Fragment>
+        :
+          <div className={classes.chipTray}>
+            {
+              question.responders.map(responder => (
+              <Tooltip title={responder.name} key={responder.name}>
+                  <FaceIcon fontSize="small" className={classes.smallAvatar}/>
+              </Tooltip>
+              ))
+            }
+            <Typography variant='caption'>
+              {question.responders.length > 1 ? `Patrick +${question.responders.length - 1} can respond`: 'Patrick can respond'}
+            </Typography>
           </div>
-          <div>
-            {question.responders.map(responder => {
-              if (responder.name !== 'Patrick Byrne') {
-                return (
-                  <Chip
-                    key={responder.id} 
-                    onDelete={handleDelete} 
-                    label={responder.name} 
-                    avatar={<Avatar><FaceIcon /></Avatar>}
-                    className={classes.chip}
-                    variant="outlined"
-                  />
-                );
-              }
-              return;
-            })}
-          </div>
-        </React.Fragment> :
-
-        <div className={classes.chipTray}>
-          {
-            question.responders.map(responder => (
-            <Tooltip title={responder.name} key={responder.name}>
-              <Avatar className={classes.smallAvatar}>
-                <FaceIcon />
-              </Avatar>
-            </Tooltip>
-            ))
-          }
-          <Typography variant='caption'>
-            {question.responders.length > 1 ? `Patrick +${question.responders.length - 1} can respond`: 'Patrick can respond'}
-          </Typography>
-        </div>
       }
     </React.Fragment>
     );
   }
 });
 
-export default CommentAndRespond;
+export default withStyles(styles(theme))(CommentAndRespond);

@@ -23,9 +23,7 @@ const OpenQuestions = React.memo(({location}: IQuestionPageProps) => {
   return (
     <div className={classes.root}>
       {openQuestionArr.map(question => (
-        <div id={`${question.id}`}>
-          <QuestionCard question={question} key={question.id} hash={location.hash} />
-        </div>
+        <QuestionCard question={question} key={question.id} hash={location.hash} id={`${question.id}`}/>
       ))}
     </div>
   );

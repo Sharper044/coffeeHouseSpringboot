@@ -41,8 +41,6 @@ NOT MVP!!!
 We need the questions to be restructured. When deligated, they are cagorized as unanswered and stay at the top. Once answered, they are closed/locked. A question can then be reopened by a user. This then puts a link to the old question and a 'RE: [old title]' in the new question. It acts then like a new question since it is. The  
 
 -- SYSTEM --
-  - ROUTING -
-    Ln1 & Ln5: We need urls for all responses/questions, which means the introduction of react-router.
 
   - AUTHENTICATION -
     Ln2: Hook up authentication through Okta, but try to keep it as modular as possible 

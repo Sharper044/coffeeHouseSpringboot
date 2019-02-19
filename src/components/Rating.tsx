@@ -4,10 +4,12 @@ import React from 'react';
 
 import FilledStar from '@material-ui/icons/Star';
 import EmptyStar from '@material-ui/icons/StarBorder';
+import { theme } from '../styles/theme';
 
 const useStyles = makeStyles((_theme: Theme) => ({
   root: {
     display: 'flex',
+    marginBottom: theme.spacing.unit / 2,
   },
   gold: {
     color: 'gold',

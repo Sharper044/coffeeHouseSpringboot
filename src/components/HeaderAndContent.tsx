@@ -27,8 +27,13 @@ const drawerWidth = 57;
 
 const useStyles = makeStyles( (theme: Theme) => ({
   avatar: {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.light,
     margin: 10,
+  },
+  avatarColor: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.light,
   },
   grow: {
     flexGrow: 1,
@@ -56,10 +61,6 @@ const useStyles = makeStyles( (theme: Theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 12,
   },
   hide: {
     display: 'none',

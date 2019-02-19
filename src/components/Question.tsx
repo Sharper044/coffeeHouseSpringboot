@@ -1,11 +1,8 @@
+import { ExpansionPanelDetails, ExpansionPanelSummary, Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import React from 'react';
-
-import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 import { IQuestion } from '../testData';
 import CommentAndRespond from './CommentAndRespond';
 import Discussion from './Discussion';
@@ -14,9 +11,6 @@ import Rating from './Rating';
 import SocialMenu from './SocialMenu';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    width: '100%',
-  },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
@@ -28,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between'
   },
-  subtitle: {
+  title: {
     display: 'flex',
     flexDirection: 'column',
   },
@@ -38,21 +32,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   flex: {
     display: 'flex',
-  }
+  },
+  subtitle: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 }));
 
-const QuestionCard = ({question, hash, id}:{question: IQuestion, hash: string, id: string}) => {
+const Question = (props: {question: IQuestion}) => {
   const classes = useStyles();
-  const hashCompare = `#${question.id}`;
-  console.log(hash);
+  const { question } = props;
 
   return (
-    <ExpansionPanel className={classes.root} defaultExpanded={hash === hashCompare}>
-      <div id={id}/>
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+    <React.Fragment>
+      <ExpansionPanelSummary>
         <div className={classes.summary}>
           <div className={classes.subtitle}>
-            <Typography className={classes.heading}>{question.title}</Typography>
+            <Typography variant="h5" className={classes.heading}>{question.title}</Typography>
             <Typography variant='caption'>Asked {question.date}</Typography>
           </div>
           <div className={classes.flex}>
@@ -63,7 +59,7 @@ const QuestionCard = ({question, hash, id}:{question: IQuestion, hash: string, i
             <SocialMenu question={question}/>
           </div>
         </div>
-      </ExpansionPanelSummary>
+      </ExpansionPanelSummary>      
       <ExpansionPanelDetails className={classes.subtitle}>
         <Typography>
           {question.question}
@@ -72,8 +68,8 @@ const QuestionCard = ({question, hash, id}:{question: IQuestion, hash: string, i
         <Discussion comments={question.comments}/>
         <LockMessage isLocked={question.isLocked}/>
       </ExpansionPanelDetails>
-    </ExpansionPanel>
+    </React.Fragment>
   );
 };
 
-export default QuestionCard;
+export default Question;

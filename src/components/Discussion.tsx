@@ -1,5 +1,6 @@
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
+import classNames from 'classnames';
 import React from 'react';
 
 import { Avatar, List, ListItem, ListItemText } from '@material-ui/core';
@@ -9,7 +10,7 @@ import { IComment } from '../testData';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
-    maxHeight: '250px',
+    maxHeight: '350px',
     overflow: 'auto',
   },
   answer: {
@@ -19,13 +20,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Discussion = React.memo((props: {comments: IComment[]}) => {
-  const { comments } = props; // TODO: get the comments to appear in reverse order. Newest on top.
+  const { comments } = props;
   const classes = useStyles();
 
   return (
     <List className={classes.root}>
-      {comments.reverse().map(comment => (
-        <ListItem key={comment.id} className={comment.isAnswer ? classes.answer : ''}>
+      {comments.map(comment => (
+        <ListItem key={comment.id} className={classNames({[classes.answer]: comment.isAnswer})}>
           <Avatar>
             <AvatarIcon />
           </Avatar>
