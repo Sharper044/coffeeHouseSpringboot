@@ -1,7 +1,7 @@
 import { Button, TextField, Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles, useTheme } from '@material-ui/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
 import RichTextEditor from 'react-rte';
 import QuestionTileAndModal from '../components/QuestionTileAndModal';
 import { IQuestion, questions } from '../testData';
@@ -39,7 +39,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.light
   },
   editor: {
-    height: '400px'
+    height: '400px',
+    maxHeight: '400px'
   }
 }));
 
@@ -57,13 +58,15 @@ const filterQuestions = (title: string): IQuestion[] => {
   return filteredQuestions;
 };
 
-const CreateQuestion = ({questionId = ''}: {questionId?: string}) => {
+const CreateQuestion = React.memo(({questionId = ''}: {questionId?: string}) => {
+  // initialize css
   const classes = useStyles();
   const theme: Theme = useTheme();
   
+  // initialize the text for the question
   let titleInit = '';
   let descInit = RichTextEditor.createEmptyValue();
- 
+  
   if (questionId !== '') {
     const question = questions.find(q => `${q.id}` === questionId);
     if (question) {
@@ -71,11 +74,34 @@ const CreateQuestion = ({questionId = ''}: {questionId?: string}) => {
       descInit = RichTextEditor.createValueFromString(`<p>Link to original question <a href="localhost:3000/responses#${question.id}">here</a></p>`, 'html');
     }
   }
-
+  
   const [title, setTitle] = React.useState(titleInit);
   const [description, setDescription] = React.useState(descInit);
 
+  // start tracking prop changes (unsure as to why memo is not working)
+  const [currentQID, setCurrentQID] = React.useState(questionId);
+  
   const filteredQuestions = filterQuestions(title);
+  
+  useEffect(() => {
+    if (questionId !== currentQID) {
+      const question = questions.find(q => `${q.id}` === questionId);
+      if (question) {
+        titleInit = `RE: ${question.title}`;
+        descInit = RichTextEditor.createValueFromString(`<p>Link to original question <a href="localhost:3000/responses#${question.id}">here</a></p>`, 'html');
+      } else {
+        titleInit = '';
+        descInit = RichTextEditor.createEmptyValue();
+      }
+      setTitle(titleInit);
+      setDescription(descInit);
+    } else {
+      setTitle(title);
+      setDescription(description);
+    }
+    setCurrentQID(questionId);
+  });
+
 
   return (
     <div className={classes.root}>
@@ -143,6 +169,6 @@ const CreateQuestion = ({questionId = ''}: {questionId?: string}) => {
       </section>
     </div>
   );
-};
+});
 
 export default CreateQuestion;

@@ -64,7 +64,6 @@ const Body = ({setValue}: {setValue: React.Dispatch<React.SetStateAction<number>
             path="/new/:id" 
             render={(route) => {
               setValue(2);
-              console.log(route);
               return <CreateQuestion questionId={route.match.params.id}/>;
             }}
           />
