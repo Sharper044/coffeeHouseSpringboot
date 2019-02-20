@@ -66,7 +66,7 @@ const Question = (props: {question: IQuestion}) => {
         </Typography>
         <CommentAndRespond question={question}/>
         <Discussion comments={question.comments}/>
-        <LockMessage isLocked={question.isLocked}/>
+        <LockMessage isLocked={question.isLocked} id={question.id}/>
       </ExpansionPanelDetails>
     </React.Fragment>
   );

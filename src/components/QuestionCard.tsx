@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const QuestionCard = ({question, hash, id}:{question: IQuestion, hash: string, id: string}) => {
   const classes = useStyles();
   const hashCompare = `#${question.id}`;
-  console.log(hash);
 
   return (
     <ExpansionPanel className={classes.root} defaultExpanded={hash === hashCompare}>
@@ -70,7 +69,7 @@ const QuestionCard = ({question, hash, id}:{question: IQuestion, hash: string, i
         </Typography>
         <CommentAndRespond question={question}/>
         <Discussion comments={question.comments}/>
-        <LockMessage isLocked={question.isLocked}/>
+        <LockMessage isLocked={question.isLocked} id={question.id}/>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

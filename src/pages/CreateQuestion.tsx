@@ -53,11 +53,23 @@ const filterQuestions = (title: string): IQuestion[] => {
   return filteredQuestions;
 };
 
-const CreateQuestion = () => {
+const CreateQuestion = ({questionId = ''}: {questionId?: string}) => {
   const classes = useStyles();
   const theme: Theme = useTheme();
-  const [title, setTitle] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  
+  let titleInit = '';
+  let descInit = '';
+ 
+  if (questionId !== '') {
+    const question = questions.find(q => `${q.id}` === questionId);
+    if (question) {
+      titleInit = `RE: ${question.title}`;
+      descInit = `Link to original question: localhost:3000/responses#${question.id}`;
+    }
+  }
+
+  const [title, setTitle] = React.useState(titleInit);
+  const [description, setDescription] = React.useState(descInit);
 
   const filteredQuestions = filterQuestions(title);
 

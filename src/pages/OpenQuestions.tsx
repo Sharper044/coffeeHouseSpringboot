@@ -18,7 +18,7 @@ interface IQuestionPageProps {
 
 const OpenQuestions = React.memo(({location}: IQuestionPageProps) => {
   const classes = useStyles();
-  const openQuestionArr = questions.filter(question => !question.isAnswered);
+  const openQuestionArr = questions.filter(question => !question.isAnswered).sort((q1, q2) => q2.rating - q1.rating);
 
   return (
     <div className={classes.root}>
