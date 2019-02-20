@@ -57,7 +57,7 @@ const Body = ({setValue}: {setValue: React.Dispatch<React.SetStateAction<number>
             path="/new" 
             render={() => {
               setValue(2);
-              return <CreateQuestion/>;
+              return <CreateQuestion questionId=""/>;
             }}
           />
           <Route 

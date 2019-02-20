@@ -2,6 +2,7 @@ import { Button, TextField, Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import React from 'react';
+import RichTextEditor from 'react-rte';
 import QuestionTileAndModal from '../components/QuestionTileAndModal';
 import { IQuestion, questions } from '../testData';
 
@@ -36,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   green: {
     backgroundColor: theme.palette.primary.light
+  },
+  editor: {
+    height: '400px'
   }
 }));
 
@@ -58,13 +62,13 @@ const CreateQuestion = ({questionId = ''}: {questionId?: string}) => {
   const theme: Theme = useTheme();
   
   let titleInit = '';
-  let descInit = '';
+  let descInit = RichTextEditor.createEmptyValue();
  
   if (questionId !== '') {
     const question = questions.find(q => `${q.id}` === questionId);
     if (question) {
       titleInit = `RE: ${question.title}`;
-      descInit = `Link to original question: localhost:3000/responses#${question.id}`;
+      descInit = RichTextEditor.createValueFromString(`<p>Link to original question <a href="localhost:3000/responses#${question.id}">here</a></p>`, 'html');
     }
   }
 
@@ -98,21 +102,17 @@ const CreateQuestion = ({questionId = ''}: {questionId?: string}) => {
             onChange={(event) => setTitle(event.target.value)}
           />
           <div style={{width: '100%'}}>
-            <TextField
-              label="Description"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={15}
+            <RichTextEditor
               value={description}
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={(value) => setDescription(value)}
+              className={classes.editor}
             />
             <div>
               <Button 
                 style={{color: theme.palette.primary.main}}
                 onClick={() => {
                   setTitle('');
-                  setDescription('');
+                  setDescription(RichTextEditor.createEmptyValue());
                 }}
               >
                 Submit
@@ -121,7 +121,7 @@ const CreateQuestion = ({questionId = ''}: {questionId?: string}) => {
                 style={{color: theme.palette.grey[500]}}
                 onClick={() => {
                   setTitle('');
-                  setDescription('');
+                  setDescription(RichTextEditor.createEmptyValue());
                 }}
               >
                 Cancel
