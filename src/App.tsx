@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import Content from './components/HeaderAndContent';
+import Content from './pages/HeaderAndContent';
 import { store } from './redux/store';
 import { theme } from './styles/theme';
 

@@ -4,17 +4,17 @@
 // TODO: As a Service, I need to remove/hide disabled accounts from AWS so that areas dependent on an up to date employee list are accurate.
 
 
-// TODO: As a user, I need the ability to filter responses, so that I can limit the results and find content related to my keywords
-// TODO: As a user, I need the ability to filter questions, so that I can reduce the amount of results and discover content related to my keywords.
-// TODO: As I user, show me questions with keywords to the title I type, so that I can see if a similar/related question has been asked already. And Allow me to view/rate/participate in the existing questions directly from this page.
 
-// TODO: As a user, I need the ability to contribute to an existing question, so that leadership can have a broader range of talking points in their response.
-// TODO: added responses should appear on a new row as a an addition/extension of the original question.
-// TODO: As a user, I need the ability to ask a question, so that I can have the opportunity of leadership answering my question. (New Question should be ranked at the bottom of the list)
-// TODO: As a user, I need the ability to append a follow-up question, so that the question can behave like a discussion rather than a single question. The question rank will reset and will need to rise in rank again to make it to the top.
-// TODO: As a Coffee House Owner, I need the ability to delegate another person to respond, so that a person with more insight can provide a more detailed response.
-// TODO: As a Coffee House Owner/Delegated Responder, I need the ability to end a discussion, so that no further questions can be asked on the subject.
-// TODO: As a Coffee House Owner / Delegated Responder, I need the ability to respond to questions, so that the community can see our response to the question raised.
+
+
+
+
+
+
+
+
+
+
 
 NOT MVP!!!
 // TODO: As a Coffee House Administrator/Owner, I need the ability to define the Title for the new instance of Coffee House, so that I can help provide distinction between multiple instances of Coffee House in our environment.
@@ -29,8 +29,6 @@ NOT MVP!!!
 // TODO: As a user, I need the ability to subscribe to Coffee House instances, so that I can pin multiple instances that I want to keep up to date with.
 // TODO: As a user, I should be able to browse other instances of Coffee House
 
-// TODO: Add Refresh questions button
-// TODO: Add the ability to sort the questions
 // TODO: clean up code and create tests.
 // TODO: Add error bouriies
 
@@ -50,14 +48,5 @@ We need the questions to be restructured. When deligated, they are cagorized as 
 
 -- FRONT-END --
   Ln2: Add in a login button along with the avatar pic.
-  Ln7 & Ln8: Add the ability to filter the questions/responses by title.
-  Ln14: change the buttons to be more of a reopen-question button or ask follow-up
-  Ln15 & Ln16: Change the owner text to be "Respond & Delegate" or "Respond"
-
-  - CREATE QUESTION PAGE -
-    Ln9: Use the filtering system to search all questions by title when typing in a new title. They should appear on the side as a list and when clicked on create a modal just like the expansion panel that they can directly interact with.
-    Get this built, Formik may be overkill but I will look into it.
-
-  Extra: Add all Tooltips, add in real functionality on all buttons.
 
 

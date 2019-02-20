@@ -6,6 +6,8 @@ import {
   Drawer, 
   List,
   ListItem,
+  Menu,
+  MenuItem,
   Tab,
   Tabs,
   Toolbar, 
@@ -109,9 +111,18 @@ const Content = (props: IContentProps) => {
   const open = false;
 
   const [value, setValue] = React.useState(0);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -144,9 +155,15 @@ const Content = (props: IContentProps) => {
             </Link>
           </Tabs>
           {loggedIn ? 
-            <Avatar className={classes.avatar}>
-              <AvatarIcon/>
-            </Avatar> :
+            <React.Fragment>
+              <Avatar className={classes.avatar} onClick={handleClick}>
+                <AvatarIcon/>
+              </Avatar> 
+              <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </Menu>
+            </React.Fragment>
+            :
             <Button color="inherit">Login</Button>
           }
         </Toolbar>

@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/styles';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import CreateQuestion from '../pages/CreateQuestion';
-import OpenQuestionsAndResponses from '../pages/OpenQuestionsAndResponses';
-import TabContainer from './TabContainer';
+import TabContainer from '../components/TabContainer';
+import CreateQuestion from './CreateQuestion';
+import OpenQuestionsAndResponses from './OpenQuestionsAndResponses';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
