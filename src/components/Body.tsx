@@ -4,8 +4,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import CreateQuestion from '../pages/CreateQuestion';
-import OpenQuestions from '../pages/OpenQuestions';
-import Responses from '../pages/Responses';
+import OpenQuestionsAndResponses from '../pages/OpenQuestionsAndResponses';
 import TabContainer from './TabContainer';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,20 +36,20 @@ const Body = ({setValue}: {setValue: React.Dispatch<React.SetStateAction<number>
             exact path="/" 
             render={({ location }) => {
               setValue(0);
-              return <OpenQuestions location={location}/>;
+              return <OpenQuestionsAndResponses location={location} open={true}/>;
             }}
           />
           <Route 
             path="/open" 
             render={({ location }) => {
               setValue(0);
-              return <OpenQuestions location={location}/>;
+              return <OpenQuestionsAndResponses location={location} open={true}/>;
             }}/>
           <Route 
             path="/responses" 
             render={({ location }) => {
               setValue(1);
-              return <Responses location={location}/>;
+              return <OpenQuestionsAndResponses location={location} open={false}/>;
             }}
           />
           <Route 
