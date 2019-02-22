@@ -3,14 +3,11 @@ import { Theme } from '@material-ui/core/styles';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import React, { useEffect } from 'react';
 import RichTextEditor from 'react-rte';
-import QuestionTileAndModal from '../components/QuestionTileAndModal';
+import QuestionTileAndModal from '../components/QuestionTile';
 import { IQuestion, questions } from '../testData';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-  },
-  article: {
-    padding: theme.spacing.unit * 2
   },
   section: {
     display: 'flex',
@@ -65,18 +62,16 @@ const CreateQuestion = React.memo(({questionId = ''}: {questionId?: string}) => 
   
   // initialize the text for the question
   let titleInit = '';
-  let descInit = RichTextEditor.createEmptyValue();
   
   if (questionId !== '') {
     const question = questions.find(q => `${q.id}` === questionId);
     if (question) {
       titleInit = `RE: ${question.title}`;
-      descInit = RichTextEditor.createValueFromString(`<p>Link to original question <a href="localhost:3000/responses#${question.id}">here</a></p>`, 'html');
     }
   }
   
   const [title, setTitle] = React.useState(titleInit);
-  const [description, setDescription] = React.useState(descInit);
+  const [description, setDescription] = React.useState(RichTextEditor.createEmptyValue());
 
   // start tracking prop changes (unsure as to why memo is not working)
   const [currentQID, setCurrentQID] = React.useState(questionId);
@@ -86,15 +81,8 @@ const CreateQuestion = React.memo(({questionId = ''}: {questionId?: string}) => 
   useEffect(() => {
     if (questionId !== currentQID) {
       const question = questions.find(q => `${q.id}` === questionId);
-      if (question) {
-        titleInit = `RE: ${question.title}`;
-        descInit = RichTextEditor.createValueFromString(`<p>Link to original question <a href="localhost:3000/responses#${question.id}">here</a></p>`, 'html');
-      } else {
-        titleInit = '';
-        descInit = RichTextEditor.createEmptyValue();
-      }
-      setTitle(titleInit);
-      setDescription(descInit);
+      setTitle(question ? `RE: ${question.title}` : '');
+      setDescription(RichTextEditor.createEmptyValue());
     } else {
       setTitle(title);
       setDescription(description);
@@ -109,11 +97,8 @@ const CreateQuestion = React.memo(({questionId = ''}: {questionId?: string}) => 
         <Typography variant="h5">
           Please Remember:
         </Typography>
-        <Typography paragraph>
-          To avoid repetition, before posting a question please check to see if someone else has already posted it and, if so, join in developing that question. If your question is not currently represented by an open question, create a new question.
-        </Typography>
-        <Typography style={{marginLeft: '50px'}} paragraph>
-          - Patrick Byrne
+        <Typography paragraph style={{marginBottom: theme.spacing.unit * 4}}>
+          To avoid repetition, before posting a question please check to see if someone else has already posted it and, if so, join in developing that question. If your question is not currently represented by an open question, create a new question. - Patrick Byrne
         </Typography>
       </article>
       <section className={classes.section}>
@@ -127,6 +112,16 @@ const CreateQuestion = React.memo(({questionId = ''}: {questionId?: string}) => 
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
+          {
+            currentQID !== '' &&
+            <TextField 
+              disabled
+              label="Link to previous question:"
+              value={`localhost:3000/responses#${currentQID}`}
+              fullWidth
+              style={{marginBottom: theme.spacing.unit * 2}}
+            />
+          }
           <div style={{width: '100%'}}>
             <RichTextEditor
               value={description}

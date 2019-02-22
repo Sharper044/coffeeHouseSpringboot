@@ -12,7 +12,9 @@ import { IQuestion, users } from '../testData';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    marginLeft: theme.spacing.unit,
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: theme.spacing.unit,
   },
   menu: {
     marginTop: '50px',
@@ -27,6 +29,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
   },
+  share: {
+    marginLeft: theme.spacing.unit,
+  }
 }));
 
 const SocialMenu = ({question}: {question: IQuestion}) => {
@@ -61,7 +66,7 @@ const SocialMenu = ({question}: {question: IQuestion}) => {
           </Tooltip>
         } {/* TODO: This will need some tweaking once auth and back-end are in place */}
       </div>
-      <div onClick={handleShare}>
+      <div onClick={handleShare} className={classes.share}>
         <Tooltip title="Share">
           <ShareIcon fontSize="small" style={{color: 'orange'}}/>
         </Tooltip>

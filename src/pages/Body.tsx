@@ -7,21 +7,11 @@ import TabContainer from '../components/TabContainer';
 import CreateQuestion from './CreateQuestion';
 import OpenQuestionsAndResponses from './OpenQuestionsAndResponses';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((_theme: Theme) => ({
   root: {
     flexGrow: 1,
-  },
-  tabs: {
-    backgroundColor: theme.palette.primary.light,
     display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  link: {
-    textDecoration: 'none',
-    color: theme.palette.primary.contrastText,
-  },
-  selected: {
-    color: theme.palette.primary.dark,
+    justifyContent: 'center',
   },
 }));
 

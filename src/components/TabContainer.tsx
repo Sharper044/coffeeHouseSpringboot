@@ -7,7 +7,7 @@ interface ITabContainerProps {
 
 const TabContainer = React.memo((props: ITabContainerProps) => {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 8 * 3, width: '100%', maxWidth: 1080 }}>
       {props.children}
     </Typography>
   );

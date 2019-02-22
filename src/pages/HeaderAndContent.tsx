@@ -13,12 +13,12 @@ import {
   Toolbar, 
   Typography, 
 } from '@material-ui/core';
-import { Theme } from '@material-ui/core/styles';
+import { createStyles, Theme, WithStyles } from '@material-ui/core/styles';
 import AvatarIcon from '@material-ui/icons/AccountCircle';
 import CoffeeIcon from '@material-ui/icons/FreeBreakfast';
 import MailIcon from '@material-ui/icons/Mail';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -27,7 +27,7 @@ import Body from './Body';
 
 const drawerWidth = 57;
 
-const useStyles = makeStyles( (theme: Theme) => ({
+const styles = (theme: Theme) => (createStyles({
   avatar: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.light,
@@ -97,17 +97,20 @@ const useStyles = makeStyles( (theme: Theme) => ({
     color: theme.palette.primary.contrastText,
   },
   selected: {
-    color: theme.palette.primary.dark,
+    fontWeight: "bold",
+    color: theme.palette.secondary.main,
   },
+  indicator: {
+    backgroundColor: theme.palette.secondary.main,
+  }
 }));
 
-interface IContentProps {
+interface IContentProps extends WithStyles<typeof styles> {
   loggedIn: boolean;
 }
 
 const Content = (props: IContentProps) => {
-  const classes = useStyles();
-  const { loggedIn } = props;
+  const { loggedIn, classes } = props;
   const open = false;
 
   const [value, setValue] = React.useState(0);
@@ -143,14 +146,17 @@ const Content = (props: IContentProps) => {
             onChange={handleChange} 
             className={classes.tabs}
             indicatorColor="none"
+            classes={{
+              indicator: classes.indicator
+            }}
           >
-            <Link className={classNames(classes.link, {[classes.selected]:value === 0})} to="/open">
+            <Link className={classes.link} to="/open">
               <Tab label="Open Questions" />
             </Link>
-            <Link className={classNames(classes.link, {[classes.selected]:value === 1})} to="/responses">
+            <Link className={classes.link} to="/responses">
               <Tab label="Responses" />
             </Link>
-            <Link className={classNames(classes.link, {[classes.selected]:value === 2})} to="/new">
+            <Link className={classes.link} to="/new">
               <Tab label="Create Question" />
             </Link>
           </Tabs>
@@ -190,4 +196,4 @@ const Content = (props: IContentProps) => {
   );
 };
 
-export default Content;
+export default withStyles(styles)(Content);

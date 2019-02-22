@@ -1,21 +1,17 @@
-import { Avatar, Button, ListItem, ListItemText, Theme } from '@material-ui/core';
-import LockIcon from '@material-ui/icons/Lock';
+import { Button, ListItem, ListItemText, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/styles';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-const LockMessage = React.memo((props: {isLocked: boolean, id: number}) => {
-  if (props.isLocked) {
+const LockMessage = React.memo((props: {isAnswered: boolean, id: number}) => {
+  if (props.isAnswered) {
     const theme: Theme = useTheme();
     return (
       <ListItem>
-        <Avatar>
-          <LockIcon />
-        </Avatar>
         <ListItemText
-          primary="This Question has been Locked by the Responders."
-          secondary="If you want to continue this topic, you will need to create a new question."
+          primary="This question has been answered."
+          secondary="If you want to reopen this topic, you will need to create a new question."
         />
         <Link to={`/new/${props.id}`} style={{textDecoration: 'none'}}>
           <Button style={{color: theme.palette.primary.main}}>

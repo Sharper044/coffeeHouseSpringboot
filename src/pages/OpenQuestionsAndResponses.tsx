@@ -11,7 +11,7 @@ import { questions } from '../testData';
 
 const useStyles = makeStyles((_theme: Theme) => ({
   root: {
-    flexGrow: 1,
+    width: '100%'
   },
 }));
 
