@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - hello",
+      "request": "launch",
+      "mainClass": "hello"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-DemoApplication<coffee-house>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "labs.coffeehouse.DemoApplication",
+      "projectName": "coffee-house",
+      "args": ""
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-MavenWrapperDownloader",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "MavenWrapperDownloader",
+      "args": ""
+    }
+  ]
+}
