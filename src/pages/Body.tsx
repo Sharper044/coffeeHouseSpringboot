@@ -1,5 +1,8 @@
+import { Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
+import { ImplicitCallback } from '@okta/okta-react';
+import classNames from 'classnames';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
@@ -13,52 +16,65 @@ const useStyles = makeStyles((_theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
+  notAuthenticated: {
+    alignItems: 'center',
+    height: '80vh'
+  }
 }));
 
-const Body = ({setValue}: {setValue: React.Dispatch<React.SetStateAction<number>>}) => {
+const Body = ({setValue, authenticated}: {setValue: React.Dispatch<React.SetStateAction<number>>, authenticated: boolean | null}) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <TabContainer>
-        <Switch>
-          <Route 
-            exact path="/" 
-            render={({ location }) => {
-              setValue(0);
-              return <OpenQuestionsAndResponses location={location} open={true}/>;
-            }}
-          />
-          <Route 
-            path="/open" 
-            render={({ location }) => {
-              setValue(0);
-              return <OpenQuestionsAndResponses location={location} open={true}/>;
-            }}/>
-          <Route 
-            path="/responses" 
-            render={({ location }) => {
-              setValue(1);
-              return <OpenQuestionsAndResponses location={location} open={false}/>;
-            }}
-          />
-          <Route 
-            exact
-            path="/new" 
-            render={() => {
-              setValue(2);
-              return <CreateQuestion questionId=""/>;
-            }}
-          />
-          <Route 
-            path="/new/:id" 
-            render={(route) => {
-              setValue(2);
-              return <CreateQuestion questionId={route.match.params.id}/>;
-            }}
-          />
-        </Switch>
-      </TabContainer>
+    <div className={classNames(classes.root, {[classes.notAuthenticated]: (!authenticated)})}>
+      {
+        authenticated ?
+          <TabContainer>
+            <Switch>
+              <Route 
+                exact path="/" 
+                render={({ location }) => {
+                  setValue(0);
+                  return <OpenQuestionsAndResponses location={location} open={true}/>;
+                }}
+              />
+              <Route 
+                path="/open" 
+                render={({ location }) => {
+                  setValue(0);
+                  return <OpenQuestionsAndResponses location={location} open={true}/>;
+                }}/>
+              <Route 
+                path="/responses" 
+                render={({ location }) => {
+                  setValue(1);
+                  return <OpenQuestionsAndResponses location={location} open={false}/>;
+                }}
+              />
+              <Route 
+                exact
+                path="/new" 
+                render={() => {
+                  setValue(2);
+                  return <CreateQuestion questionId=""/>;
+                }}
+              />
+              <Route 
+                path="/new/:id" 
+                render={(route) => {
+                  setValue(2);
+                  return <CreateQuestion questionId={route.match.params.id}/>;
+                }}
+              />
+              <Route path='/implicit/callback' component={ImplicitCallback}/>
+            </Switch>
+          </TabContainer>
+        :
+          <Typography variant='h5'>
+            Welcome to Coffee House! Please login.
+          </Typography>
+      }
+      
     </div>
   );
 };

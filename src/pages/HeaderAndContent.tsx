@@ -1,24 +1,11 @@
-import { 
-  AppBar, 
-  Avatar, 
-  Button, 
-  Divider,
-  Drawer, 
-  List,
-  ListItem,
-  Menu,
-  MenuItem,
-  Tab,
-  Tabs,
-  Toolbar, 
-  Typography, 
-} from '@material-ui/core';
+import { AppBar, Avatar, Button, Divider, Drawer, List, ListItem, Menu, MenuItem, Tab, Tabs, Toolbar, Typography, } from '@material-ui/core';
 import { createStyles, Theme, WithStyles } from '@material-ui/core/styles';
 import AvatarIcon from '@material-ui/icons/AccountCircle';
 import CoffeeIcon from '@material-ui/icons/FreeBreakfast';
 import MailIcon from '@material-ui/icons/Mail';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { withStyles } from '@material-ui/styles';
+import { withAuth, } from '@okta/okta-react';
 import classNames from 'classnames';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -105,16 +92,32 @@ const styles = (theme: Theme) => (createStyles({
   }
 }));
 
-interface IContentProps extends WithStyles<typeof styles> {
-  loggedIn: boolean;
+export interface IAuth {
+  auth: {
+    login(redirectUri: string): {};
+    logout(redirectUri: string): {};
+    isAuthenticated(): boolean;
+    getAccessToken(): string;
+  }
 }
 
+interface IContentProps extends WithStyles<typeof styles>, IAuth {}
+
 const Content = (props: IContentProps) => {
-  const { loggedIn, classes } = props;
+  const { classes } = props;
   const open = false;
 
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+  const [authenticated, setAuthenticated] = React.useState<boolean | null>(null);
+
+  const checkAuthentication = async () => {
+    const authenticatedStatus = await props.auth.isAuthenticated();
+    console.log('authenticated', authenticated, 'authenticatedStatus', authenticatedStatus);
+    if (authenticatedStatus !== authenticated) {
+      setAuthenticated( authenticatedStatus );
+    }
+  };
 
   const handleChange = (_: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -126,6 +129,20 @@ const Content = (props: IContentProps) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  React.useEffect(() => {
+    checkAuthentication();
+  });
+
+  const login = async () => {
+    // Redirect to '/' after login
+    props.auth.login('/');
+  };
+
+  const logout = async () => {
+    // Redirect to '/' after logout
+    props.auth.logout('/');
   };
 
   return (
@@ -141,36 +158,39 @@ const Content = (props: IContentProps) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Coffee House
           </Typography>
-          <Tabs 
-            value={value} 
-            onChange={handleChange} 
-            className={classes.tabs}
-            indicatorColor="none"
-            classes={{
-              indicator: classes.indicator
-            }}
-          >
-            <Link className={classes.link} to="/open">
-              <Tab label="Open Questions" />
-            </Link>
-            <Link className={classes.link} to="/responses">
-              <Tab label="Responses" />
-            </Link>
-            <Link className={classes.link} to="/new">
-              <Tab label="Create Question" />
-            </Link>
-          </Tabs>
-          {loggedIn ? 
+          {
+            authenticated &&
+            <Tabs 
+              value={value} 
+              onChange={handleChange} 
+              className={classes.tabs}
+              indicatorColor="none"
+              classes={{
+                indicator: classes.indicator
+              }}
+            >
+              <Link className={classes.link} to="/open">
+                <Tab label="Open Questions" />
+              </Link>
+              <Link className={classes.link} to="/responses">
+                <Tab label="Responses" />
+              </Link>
+              <Link className={classes.link} to="/new">
+                <Tab label="Create Question" />
+              </Link>
+            </Tabs>
+          }
+          {authenticated ? 
             <React.Fragment>
               <Avatar className={classes.avatar} onClick={handleClick}>
                 <AvatarIcon/>
               </Avatar> 
               <Menu id="simple-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
               </Menu>
             </React.Fragment>
             :
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" style={{margin: '10px'}} onClick={login}>Login</Button>
           }
         </Toolbar>
       </AppBar>
@@ -190,10 +210,10 @@ const Content = (props: IContentProps) => {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Body setValue={setValue}/>
+        <Body setValue={setValue} authenticated={authenticated}/>
       </main>
     </div>
   );
 };
 
-export default withStyles(styles)(Content);
+export default withStyles(styles)(withAuth(Content));
