@@ -46,7 +46,7 @@ const QuestionTile = ({question}: {question: IQuestion}) => {
           :
           <div className={classes.answered}/>
         }
-        <Typography variant='subtitle1'>
+        <Typography variant='subheading'>
           {question.title}
         </Typography>
       </Card>

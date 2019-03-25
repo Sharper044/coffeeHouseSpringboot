@@ -94,7 +94,7 @@ const CreateQuestion = React.memo(({questionId = ''}: {questionId?: string}) => 
   return (
     <div className={classes.root}>
       <article>
-        <Typography variant="h5">
+        <Typography variant="headline">
           Please Remember:
         </Typography>
         <Typography paragraph style={{marginBottom: theme.spacing.unit * 4}}>

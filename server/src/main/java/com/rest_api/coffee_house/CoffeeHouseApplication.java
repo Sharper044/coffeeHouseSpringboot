@@ -1,13 +1,13 @@
-package com.coffeehouse.coffeehouse;
+package com.rest_api.coffee_house;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CoffeehouseApplication {
+public class CoffeeHouseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CoffeehouseApplication.class, args);
+		SpringApplication.run(CoffeeHouseApplication.class, args);
 	}
 
 }

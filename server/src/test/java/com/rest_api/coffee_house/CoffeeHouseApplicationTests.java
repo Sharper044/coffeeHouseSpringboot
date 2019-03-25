@@ -1,4 +1,4 @@
-package com.coffeehouse.coffeehouse;
+package com.rest_api.coffee_house;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CoffeehouseApplicationTests {
+public class CoffeeHouseApplicationTests {
 
 	@Test
 	public void contextLoads() {

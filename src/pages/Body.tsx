@@ -1,7 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
-import { ImplicitCallback } from '@okta/okta-react';
 import classNames from 'classnames';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -66,11 +65,10 @@ const Body = ({setValue, authenticated}: {setValue: React.Dispatch<React.SetStat
                   return <CreateQuestion questionId={route.match.params.id}/>;
                 }}
               />
-              <Route path='/implicit/callback' component={ImplicitCallback}/>
             </Switch>
           </TabContainer>
         :
-          <Typography variant='h5'>
+          <Typography variant='headline'>
             Welcome to Coffee House! Please login.
           </Typography>
       }

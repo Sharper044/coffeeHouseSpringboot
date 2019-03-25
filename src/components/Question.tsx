@@ -57,7 +57,7 @@ const Question = (props: {question: IQuestion}) => {
     <div className={classes.title}>
       <div className={classes.summary}>
         <div className={classes.subtitle}>
-          <Typography variant="h5" className={classes.heading}>
+          <Typography variant="headline" className={classes.heading}>
             {
               question.isAnswered ?
               <Tooltip title="Question has been answered">

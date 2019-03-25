@@ -96,9 +96,9 @@ export interface IAuth {
   auth: {
     login(redirectUri: string): {};
     logout(redirectUri: string): {};
-    isAuthenticated(): boolean;
+    isAuthenticated(): Promise<boolean>;
     getAccessToken(): string;
-  }
+  };
 }
 
 interface IContentProps extends WithStyles<typeof styles>, IAuth {}
@@ -113,7 +113,6 @@ const Content = (props: IContentProps) => {
 
   const checkAuthentication = async () => {
     const authenticatedStatus = await props.auth.isAuthenticated();
-    console.log('authenticated', authenticated, 'authenticatedStatus', authenticatedStatus);
     if (authenticatedStatus !== authenticated) {
       setAuthenticated( authenticatedStatus );
     }
@@ -155,7 +154,7 @@ const Content = (props: IContentProps) => {
       >
         <Toolbar disableGutters={true} className={classes.green}>
           <CoffeeIcon className={classes.icon}/>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
+          <Typography variant="title" color="inherit" className={classes.grow}>
             Coffee House
           </Typography>
           {
@@ -194,13 +193,14 @@ const Content = (props: IContentProps) => {
           }
         </Toolbar>
       </AppBar>
+      {/* this Drawer is to hold the future multi-bundles of different coffee houses */}
       <Drawer
         variant="permanent"
         className={open ? classes.drawer : classes.hide}
       >
         <div className={classes.placeholder}/>
         <List className={classes.list}>
-          {['', '', '', ''].map((text, index) => (
+          {['a', 'b', 'c', 'd'].map((text, index) => (
             <ListItem button={true} key={text}>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItem>
