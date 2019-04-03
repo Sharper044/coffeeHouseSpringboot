@@ -79,6 +79,9 @@ const styles = (theme: Theme) => (createStyles({
     display: 'flex',
     justifyContent: 'flex-end',
   },
+  tab: {
+    height: '64px'
+  },
   link: {
     textDecoration: 'none',
     color: theme.palette.primary.contrastText,
@@ -169,13 +172,13 @@ const Content = (props: IContentProps) => {
               }}
             >
               <Link className={classes.link} to="/open">
-                <Tab label="Open Questions" />
+                <Tab label="Open Questions" className={classes.tab}/>
               </Link>
               <Link className={classes.link} to="/responses">
-                <Tab label="Responses" />
+                <Tab label="Responses" className={classes.tab}/>
               </Link>
               <Link className={classes.link} to="/new">
-                <Tab label="Create Question" />
+                <Tab label="Create Question" className={classes.tab}/>
               </Link>
             </Tabs>
           }
