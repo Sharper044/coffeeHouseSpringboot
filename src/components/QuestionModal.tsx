@@ -1,3 +1,5 @@
+// This is the modal that appears when you open up a question for more details. 
+
 import { IconButton, Modal, } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';

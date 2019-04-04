@@ -1,3 +1,5 @@
+// These are the mapped tiles used in the create questions page that show the possibly duplicate questions.
+
 import { Card, Tooltip, Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';

@@ -1,3 +1,10 @@
+// This sets up a number of things on the app. 
+// 1) redux 
+// 2) routing
+// 3) Okta
+// 4) Material UI theme
+// Do note that if you are having issues with the styling, there appears to be some conflict on the createStyles hook that messes with the priority of the styles and puts it below the default MUI CSS. I find that in that case the best way to override it is inline styles.
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles, ThemeProvider } from '@material-ui/styles';
 import { ImplicitCallback, Security } from '@okta/okta-react';

@@ -1,3 +1,5 @@
+// This handles the functionality on the front end of adding comments, answers, and delegating other people to answer.
+
 import { Theme, withStyles } from '@material-ui/core/styles';
 import React from 'react';
 

@@ -1,3 +1,5 @@
+// This is the question summary card that is used in the open/responded questions card.
+
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import classNames from 'classnames';

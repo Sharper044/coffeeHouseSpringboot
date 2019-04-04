@@ -1,3 +1,5 @@
+// Question formating used in the question modal
+
 import { ExpansionPanelDetails, Tooltip, Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';

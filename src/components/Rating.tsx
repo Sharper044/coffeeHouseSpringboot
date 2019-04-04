@@ -1,3 +1,5 @@
+// custom 5-star rating tool. Seen on each question card.
+
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
 import React from 'react';
@@ -23,6 +25,11 @@ const Rating = React.memo((props: {rating: number, isAnswered: boolean}) => {
   const classes = useStyles();
   const [hoverLevel, setHoverLevel] = React.useState(-1);
   const { isAnswered, rating } = props;
+  
+  const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>, value: number) => {
+    event.stopPropagation();
+    console.log(value);
+  };
 
   const filled = (starRating: number, level: number) => {
     if (!isAnswered) {
@@ -40,11 +47,6 @@ const Rating = React.memo((props: {rating: number, isAnswered: boolean}) => {
         return <EmptyStar fontSize='small' className={classes.grey}/>;
       }
     }
-  };
-
-  const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>, value: number) => {
-    event.stopPropagation();
-    console.log(value);
   };
 
   return (

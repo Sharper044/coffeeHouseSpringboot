@@ -1,5 +1,7 @@
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles';
+// This component holds all the question cards and the filtering for both the open questions and the answered questions.
+
 import { Location } from 'history';
 import React from 'react';
 
@@ -26,6 +28,8 @@ const OpenQuestionsAndResponses = React.memo(({location, open}: IQuestionPagePro
   const classes = useStyles();
   const [filter, setFilter] = React.useState('');
   const [sort, setSort] = React.useState(0);
+
+  // Filtering will need to be adjusted if the questions are coming from backend filtered by if they are answered or not.
   const questionArr = questions.filter(question => !question.isAnswered === open && question.title.toLowerCase().includes(filter.toLowerCase())).sort(sortMethods[sort].function);
 
   return (

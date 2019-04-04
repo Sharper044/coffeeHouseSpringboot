@@ -1,3 +1,5 @@
+// This is the component above the question cards that handles filtering, refreshing the list of questions, and sorting the questions on screen.
+
 import { MenuItem, TextField, Tooltip, Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import RefreshIcon from '@material-ui/icons/Refresh';

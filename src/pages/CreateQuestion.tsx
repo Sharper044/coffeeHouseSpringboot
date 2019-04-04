@@ -1,3 +1,7 @@
+// Self explanatory, this is the create question page. 
+// It also currently handles the filtering of all questions to find if the question you are making has already been addressed.
+// This can be simplified by putting that functionality into the back-end.
+
 import { Button, TextField, Typography } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { makeStyles, useTheme } from '@material-ui/styles';

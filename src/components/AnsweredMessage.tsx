@@ -1,3 +1,5 @@
+// Small message for people who want to reopen a question.
+
 import { Button, ListItem, ListItemText, Theme } from '@material-ui/core';
 import { useTheme } from '@material-ui/styles';
 import React from 'react';

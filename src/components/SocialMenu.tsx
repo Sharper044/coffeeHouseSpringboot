@@ -1,3 +1,5 @@
+// Holds the subscribe and share functionality. viewed in the question modal.
+
 import { Button, TextField, Tooltip } from '@material-ui/core';
 import Menu from '@material-ui/core/Menu';
 import { Theme } from '@material-ui/core/styles';

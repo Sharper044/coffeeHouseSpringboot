@@ -1,3 +1,6 @@
+// This file was created to have various ways the questions can be sorted. 
+// These are fed into OpenQuestionsAndResponses.tsx and FilterRefreshSort.tsx
+
 import { IQuestion } from '../testData';
 
 interface ISort {

@@ -1,3 +1,5 @@
+// Basic redux store.
+
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 // import reduxPromiseMiddleware from 'redux-promise-middleware';

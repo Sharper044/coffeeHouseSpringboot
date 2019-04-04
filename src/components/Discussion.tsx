@@ -1,3 +1,5 @@
+// This shows the comments and answers on a question. It also scrolls to the last comment if the question has been answered.
+
 import { createStyles, Theme, WithStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/styles';
 import classNames from 'classnames';

@@ -1,3 +1,6 @@
+// This file holds the Material UI Theme.
+// See: https://material-ui.com/customization/themes/#createmuitheme-options-theme
+
 import { createMuiTheme } from '@material-ui/core/styles';
 
 export const theme = createMuiTheme({

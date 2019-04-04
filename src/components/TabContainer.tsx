@@ -1,3 +1,5 @@
+// Used mostly to get the tabs working properly. could be simplified away.
+
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 

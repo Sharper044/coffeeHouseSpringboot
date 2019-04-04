@@ -1,3 +1,7 @@
+// This component holds the main header and also wraps the body. 
+// This is in place to handle routing as well as well as authentication. 
+// The authentication is currently being ran through my personal Okta dev account and a new dev account will be needed.
+
 import { AppBar, Avatar, Button, Divider, Drawer, List, ListItem, Menu, MenuItem, Tab, Tabs, Toolbar, Typography, } from '@material-ui/core';
 import { createStyles, Theme, WithStyles } from '@material-ui/core/styles';
 import AvatarIcon from '@material-ui/icons/AccountCircle';

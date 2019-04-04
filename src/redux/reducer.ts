@@ -1,4 +1,6 @@
-
+// This is a basic reducer file from one of my other projects to make redux happy.
+// My plan was to overhaul this once the back-end was ready to allow for the connection to the back-end.
+// I was also hoping to use react hooks with this.
 
 const initialState = {
   currentSearch: [],
